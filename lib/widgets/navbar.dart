@@ -1,41 +1,29 @@
-
 import 'package:flutter/material.dart';
 
 import '../core/app_colors.dart';
 import '../pages/requirement_page.dart';
+import '../pages/business_login_page.dart';
 
 class Navbar extends StatelessWidget {
   final bool isMobile;
 
-  const Navbar({
-    super.key,
-    this.isMobile = false,
-  });
+  const Navbar({super.key, this.isMobile = false});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: isMobile ? 70 : 82,
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 16 : 60,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 60),
       decoration: const BoxDecoration(
         color: Colors.white,
-        border: Border(
-          bottom: BorderSide(
-            color: AppColors.border,
-          ),
-        ),
+        border: Border(bottom: BorderSide(color: AppColors.border)),
       ),
       child: Row(
         children: [
           // LOGO
           GestureDetector(
             onTap: () {
-              Navigator.popUntil(
-                context,
-                (route) => route.isFirst,
-              );
+              Navigator.popUntil(context, (route) => route.isFirst);
             },
             child: Row(
               children: [
@@ -44,9 +32,7 @@ class Navbar extends StatelessWidget {
                   height: isMobile ? 36 : 42,
                   decoration: BoxDecoration(
                     color: AppColors.primary,
-                    borderRadius: BorderRadius.circular(
-                      isMobile ? 9 : 11,
-                    ),
+                    borderRadius: BorderRadius.circular(isMobile ? 9 : 11),
                   ),
                   child: Icon(
                     Icons.handshake_rounded,
@@ -55,14 +41,11 @@ class Navbar extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(
-                  width: isMobile ? 8 : 12,
-                ),
+                SizedBox(width: isMobile ? 8 : 12),
 
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment:
-                      CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
@@ -111,21 +94,22 @@ class Navbar extends StatelessWidget {
               onPressed: () {},
               child: const Text(
                 'How It Works',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                ),
+                style: TextStyle(fontWeight: FontWeight.w600),
               ),
             ),
 
             const SizedBox(width: 10),
 
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const BusinessLoginPage()),
+                );
+              },
               child: const Text(
                 'For Businesses',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                ),
+                style: TextStyle(fontWeight: FontWeight.w600),
               ),
             ),
 
@@ -135,32 +119,24 @@ class Navbar extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (_) =>
-                        const RequirementPage(),
-                  ),
+                  MaterialPageRoute(builder: (_) => const RequirementPage()),
                 );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
                 elevation: 0,
-                padding:
-                    const EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 20,
                   vertical: 13,
                 ),
-                shape:
-                    RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(9),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(9),
                 ),
               ),
               child: const Text(
                 'Submit Requirement',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                ),
+                style: TextStyle(fontWeight: FontWeight.w700),
               ),
             ),
           ],
@@ -168,30 +144,18 @@ class Navbar extends StatelessWidget {
           // MOBILE MENU
           if (isMobile)
             PopupMenuButton<String>(
-              icon: const Icon(
-                Icons.menu_rounded,
-                color: AppColors.dark,
-              ),
+              icon: const Icon(Icons.menu_rounded, color: AppColors.dark),
               onSelected: (value) {
                 if (value == 'requirement') {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (_) =>
-                          const RequirementPage(),
-                    ),
+                    MaterialPageRoute(builder: (_) => const RequirementPage()),
                   );
                 }
               },
               itemBuilder: (context) => const [
-                PopupMenuItem(
-                  value: 'how',
-                  child: Text('How It Works'),
-                ),
-                PopupMenuItem(
-                  value: 'business',
-                  child: Text('For Businesses'),
-                ),
+                PopupMenuItem(value: 'how', child: Text('How It Works')),
+                PopupMenuItem(value: 'business', child: Text('For Businesses')),
                 PopupMenuItem(
                   value: 'requirement',
                   child: Text('Submit Requirement'),
